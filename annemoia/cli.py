@@ -13,10 +13,19 @@ def hacker(path):
 
 @cli.command()
 @click.argument('path', type=click.Path(exists=True))
-def scan(path):
+@click.option('--verbose', '-v', is_flag=True, help="Show detailed findings")
+def scan(path, verbose):
     scanner = Scanner(path)
     findings = scanner.run()
     click.echo(f"Found {len(findings)} potential issues.")
+    if verbose and findings:
+        click.echo()  
+        for idx, f in enumerate(findings, 1):
+            file   = f.get('file', '<unknown>')
+            line   = f.get('line', f.get('lineno', '?'))
+            rule   = f.get('test_id', f.get('check_id', ''))
+            msg    = f.get('issue_text', f.get('message', ''))
+            click.echo(f"{idx}. {file}:{line} [{rule}] {msg}")
 
 @cli.command()
 @click.option('--format', 'fmt', type=click.Choice(['json', 'html']), default='json')

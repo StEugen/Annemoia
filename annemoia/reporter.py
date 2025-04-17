@@ -1,5 +1,5 @@
 import json
-
+# TODO: Create report, take info from scanner
 class Reporter:
     def __init__(self, findings=None):
         self.findings = findings or []

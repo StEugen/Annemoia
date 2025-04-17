@@ -18,6 +18,5 @@ class PythonScanner(BaseScanner):
         if not result.stdout:
             return []
         data = json.loads(result.stdout)
-        # bandit outputs a "results" list
         return data.get("results", [])
 

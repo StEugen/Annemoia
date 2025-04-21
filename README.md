@@ -34,17 +34,6 @@ To perform a basic code scan on your project:
 ann scan /path/to/your/code
 ```
 
-Running Specific Tests
-To run a specific set of tests (e.g., SQL injection checks, XSS, etc.):
-```bash
-ann test --type sql-injection /path/to/your/code
-```
-
-Generating Reports
-After scanning, you can generate a detailed report. By default, the report is saved as annemoia_report.json in the current working directory:
-```bash
-ann report --format json
-```
 Help and Options
 For a list of available commands and options:
 
@@ -60,8 +49,7 @@ Options:
 
 Commands:
   scan      Scan the provided codebase for vulnerabilities.
-  test      Run specific security tests.
-  report    Generate a vulnerability report.
+  hacker      Run specific security tests.
 ```
 
 ## Configuration

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 class BaseScanner(ABC):
     """
@@ -12,7 +12,6 @@ class BaseScanner(ABC):
         ...
 
     @abstractmethod
-    def analyze(self, file_path: Path) -> List[Dict]:
-        """Return a list of findings (dicts) for a single file."""
+    def analyze(self, file_path: Path) -> Optional[List[Dict]]:
+        """Return a list of findings (dicts) for a single file or None if handled differently."""
         ...
-

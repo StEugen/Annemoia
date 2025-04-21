@@ -19,4 +19,3 @@ class PythonScanner(BaseScanner):
             return []
         data = json.loads(result.stdout)
         return data.get("results", [])
-

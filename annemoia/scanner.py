@@ -1,21 +1,20 @@
-import os
 from pathlib import Path
 from typing import List, Dict
 
 from annemoia.scanners.base import BaseScanner
 from annemoia.scanners.python_scanner import PythonScanner
-#from annemoia.scanners.js_scanner import JavaScriptScanner
-
-# TODO: i guess it returning list of files, need to check it
+from annemoia.scanners.ruby_scanner import RubyScanner
+# from annemoia.scanners.js_scanner import JavaScriptScanner
 
 class Scanner:
-    def __init__(self, root_path: str):
+    def __init__(self, root_path: str, fity: str = "csv"):
         self.root = Path(root_path)
-        
+
         self.scanners: List[BaseScanner] = [
             PythonScanner(),
+            RubyScanner(self.root, fity),
         ]
-        
+
         self._ext_map = {}
         for sc in self.scanners:
             for ext in sc.extensions():
@@ -31,13 +30,13 @@ class Scanner:
                 continue
             try:
                 file_findings = scanner.analyze(fp)
-                for f in file_findings:
-                    f.setdefault('file', str(fp))
-                    findings.append(f)
+                if file_findings:
+                    for f in file_findings:
+                        f.setdefault('file', str(fp))
+                        findings.append(f)
             except Exception as e:
                 findings.append({
                     'file': str(fp),
                     'error': str(e)
                 })
         return findings
-

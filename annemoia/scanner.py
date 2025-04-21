@@ -6,6 +6,7 @@ from annemoia.scanners.python_scanner import PythonScanner
 from annemoia.scanners.ruby_scanner import RubyScanner
 # from annemoia.scanners.js_scanner import JavaScriptScanner
 
+# TODO: Boot multiple scanners at once, if corresponding files found
 class Scanner:
     def __init__(self, root_path: str, fity: str = "csv"):
         self.root = Path(root_path)
